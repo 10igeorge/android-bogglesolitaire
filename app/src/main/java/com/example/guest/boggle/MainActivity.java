@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
@@ -36,12 +37,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
+        ArrayList<String> newConsonants = new ArrayList<>(Arrays.asList(consonants));
+        Collections.shuffle(newConsonants);
+
         for (int i = 0; i < 6; i++){
-            int rando = new Random().nextInt(consonants.length);
-            if (generatedChar != null && !generatedChar.contains(i)){
-                generatedChar.add(consonants[rando]);
-            }
-        }
+            generatedChar.add(newConsonants.get(i));
+         }
+
+
 
         for (int i = 0; i < 2; i++){
             int rando = new Random().nextInt(vowels.length);
@@ -56,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
                 String answer = mEditAnswerText.getText().toString();
                 answers.add(answer);
                 Log.v("answers", answers.toString());
+                mEditAnswerText.setText("");
             }
         });
     }
