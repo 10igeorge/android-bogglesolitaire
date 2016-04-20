@@ -67,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, AnswerActivity.class);
+                intent.putStringArrayListExtra("generatedCharArray", generatedChar);
                 intent.putStringArrayListExtra("answers", answers);
                 startActivity(intent);
             }
