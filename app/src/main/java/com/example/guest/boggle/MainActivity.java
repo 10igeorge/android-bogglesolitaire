@@ -24,8 +24,9 @@ public class MainActivity extends AppCompatActivity {
     @Bind(R.id.generatedCharArray) TextView mGeneratedCharArray;
     @Bind (R.id.editAnswerText) EditText mEditAnswerText;
     @Bind (R.id.answerButton) Button mAnswerButton;
-
+    @Bind(R.id.endRoundButton) Button mEndRoundButton;
     public static final String TAG = MainActivity.class.getSimpleName();
+
     private String[] vowels = new String[] {"a", "a", "a", "e", "e", "e", "i", "i", "i", "o", "o", "o", "u", "u","u",};
     private String[] consonants = new String[] {"b", "b", "c", "d", "d", "f", "f", "g", "g", "h", "h", "j", "k", "l", "l", "m", "m", "p", "p", "qu", "r", "r", "s", "s", "t", "t", "v", "w", "x", "y", "z"};
     private ArrayList<String> generatedChar = new ArrayList<>();
@@ -58,9 +59,18 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String answer = mEditAnswerText.getText().toString();
                 answers.add(answer);
-                Log.v("answers", answers.toString());
                 mEditAnswerText.setText("");
+            }
+        });
+
+        mEndRoundButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, AnswerActivity.class);
+                intent.putStringArrayListExtra("answers", answers);
+                startActivity(intent);
             }
         });
     }
 }
+
