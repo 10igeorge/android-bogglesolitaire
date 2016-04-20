@@ -8,6 +8,8 @@ import android.widget.TextView;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
@@ -24,15 +26,17 @@ public class MainActivity extends AppCompatActivity {
 
         for (int i = 0; i < 6; i++){
             int rando = new Random().nextInt(consonants.length);
-            generatedChar.add(consonants[rando]);
-            Log.v("consonant", consonants[rando]);
+            if (generatedChar != null && !generatedChar.contains(i)){
+                generatedChar.add(consonants[rando]);
+            }
         }
+
         for (int i = 0; i < 2; i++){
             int rando = new Random().nextInt(vowels.length);
             generatedChar.add(vowels[rando]);
         }
 
         mGeneratedCharArray = (TextView) findViewById(R.id.generatedCharArray);
-        mGeneratedCharArray.setText(generatedChar.toString().replaceAll("\\[*,*]*", ""));
+        mGeneratedCharArray.setText(generatedChar.toString().replaceAll("\\[*,*]*", "")); //"\\[*,*]*" = REGEX TO REMOVE BRACKETS AND COMMAS FROM ARRAY
     }
 }
